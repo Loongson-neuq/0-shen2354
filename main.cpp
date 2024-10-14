@@ -1,31 +1,30 @@
 #include ".assignment/test.h"
-// 比较三个数的大小
-void CompareThreeNumbers(int a, int b, int c, struct Result *result) {
-    int min, mid, max;
 
-    // 临时变量，用于交换
+// 比较三个数的大小
+void CompareThreeNumbers(int a, int b, int c, Result& result) {
     int temp;
 
-    // 初始化最小值、中间值和最大值为第一个数
-    min = mid = max = a;
-    
-    if (b < min) {
-        mid = min;
-        min = b;
-    } else if (b > min && b < mid) {
-        mid = b;
+    // 找出最大值
+    if (a > b) {
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    if (a > c) {
+        temp = a;
+        a = c;
+        c = temp;
     }
 
-    if (c < min) {
-        mid = min;
-        min = c;
-    } else if (c > min && c < mid) {
-        mid = c;
-    } else if (c > mid) {
-        max = mid;
-        mid = c;
+    // 找出最小值
+    if (b > c) {
+        temp = b;
+        b = c;
+        c = temp;
     }
-    result->min = min;
-    result->mid = mid;
-    result->max = max;
+
+    // 此时a是最小值，b是中间值，c是最大值
+    result.min = a;
+    result.mid = b;
+    result.max = c;
 }
